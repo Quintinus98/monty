@@ -54,7 +54,6 @@ typedef struct global_s
 extern global_t global;
 
 char **string_to_arr(char *s, char *sep);
-char *_strcpy(char *dest, char *src);
 void print_error(char *msg);
 void insert(stack_t **stack, unsigned int line_number);
 void display(stack_t **stack, unsigned int line_number);

@@ -1,4 +1,4 @@
-#include "main.h"
+#include "monty.h"
 
 /**
  * string_to_arr - splits string
@@ -33,24 +33,6 @@ char **string_to_arr(char *s, char *sep)
 	}
 
 	return (arr);
-}
-
-/**
- * _strcpy - String copy function
- * @dest: Destination variable
- * @src: Source variable
- *
- * Return: Returns a character.
- */
-char *_strcpy(char *dest, char *src)
-{
-	int i;
-
-	for (i = 0; src[i] != '\0'; i++)
-		dest[i] = src[i];
-	dest[i] = '\0';
-
-	return (dest);
 }
 
 /**
