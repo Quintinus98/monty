@@ -31,7 +31,6 @@ int main(int argc, char **argv)
 	for (; nread != -1; nread = getline(&dynline, &len, stream))
 	{
 		cnt++;
-
 		codes = string_to_arr(dynline, " \n");
 		if (!codes)
 			continue;
@@ -61,10 +60,7 @@ void readmonty(char **codes, int cnt)
 		exit(EXIT_FAILURE);
 	}
 	global.opcode = codes[0];
-	if (codes[1])
-		global.val = atoi(codes[1]);
-	else
-		global.val = 0;
+	global.arg = codes[1];
 
 	instruction(&global.head, cnt);
 }

@@ -31,6 +31,8 @@ void (*instructions(char *s))(stack_t **stack, unsigned int line_number)
 void insert(stack_t **stack, unsigned int line_number)
 {
 	stack_t *newNode = malloc(sizeof(stack_t));
+	char *endptr;
+	long val;
 
 	(void)line_number;
 	(void)stack;
@@ -38,13 +40,15 @@ void insert(stack_t **stack, unsigned int line_number)
 	if (newNode == NULL)
 		print_error("Error: malloc failed\n");
 
-	if (!global.val)
+	errno = 0;
+	val = strtol(global.arg, &endptr, 10);
+	if (!global.arg || errno != 0 || endptr == global.arg || *endptr != '\0')
 	{
 		fprintf(stderr, "L%d: usage: push integer\n", line_number);
 		exit(EXIT_FAILURE);
 	}
 
-	newNode->n = global.val;
+	newNode->n = val;
 	newNode->prev = NULL;
 	if (global.head == NULL)
 	{

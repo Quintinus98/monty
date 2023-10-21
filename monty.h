@@ -6,6 +6,7 @@
 #include <stdlib.h>
 #include <unistd.h>
 #include <string.h>
+#include <errno.h>
 
 
 /**
@@ -39,16 +40,16 @@ typedef struct instruction_s
 } instruction_t;
 
 /**
- * global_s - global variables
+ * struct global_s - global variables
  * @head: head linked list
  * @opcode: op code
- * @val: value
+ * @arg: character to be converted.
 */
 typedef struct global_s
 {
 	stack_t *head;
 	char *opcode;
-	int val;
+	char *arg;
 } global_t;
 
 extern global_t global;
