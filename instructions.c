@@ -16,6 +16,9 @@ void (*instructions(char *s))(stack_t **stack, unsigned int line_number)
 		{"add", _add},
 		{"nop", _nop},
 		{"sub", _sub},
+		{"div", _div},
+		{"mul", _div},
+		{"mod", _div},
 		{NULL, NULL}
 	};
 	int i = 0;
