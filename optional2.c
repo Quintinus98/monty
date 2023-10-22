@@ -75,6 +75,9 @@ void _rotr(stack_t **stack, unsigned int line_number)
 	if (!current || current->next == NULL)
 		return;
 
+	while (current->next)
+		current = current->next;
+
 	current->prev->next = NULL;
 	current->next = *stack;
 	current->prev = NULL;
