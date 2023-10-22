@@ -46,36 +46,3 @@ int main(int argc, char **argv)
 
 	return (0);
 }
-
-/**
- * readmonty - reads monty files
- * @codes: takes monty codes
- * @cnt: number of lines
- * Return: 0 or 1
-*/
-int readmonty(char **codes, int cnt)
-{
-	void (*instruction)(stack_t **stack, unsigned int line_number);
-
-	instruction = instructions(codes[0]);
-	if (!instruction)
-	{
-		fprintf(stderr, "L%d: unknown instruction %s\n", cnt, codes[0]);
-		return (1);
-	}
-	global.opcode = codes[0];
-	global.arg = codes[1];
-
-	instruction(&global.head, cnt);
-	return (0);
-}
-
-/**
- * print_error - Prints error to stderr and exits the program
- * @msg: error message to print
-*/
-void print_error(char *msg)
-{
-	fprintf(stderr, "%s\n", msg);
-	exit(EXIT_FAILURE);
-}

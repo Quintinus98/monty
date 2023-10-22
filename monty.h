@@ -54,15 +54,24 @@ typedef struct global_s
 
 extern global_t global;
 
+/** essentials.c */
 char **string_to_arr(char *s, char *sep);
-void print_error(char *msg);
-void (*instructions(char *s))(stack_t **stack, unsigned int line_number);
 void free_head(stack_t **head);
 int readmonty(char **codes, int cnt);
+void print_error(char *msg);
 
+/** instructions.c */
+void (*instructions(char *s))(stack_t **stack, unsigned int line_number);
+
+/** Mandatory1.c */
 void _push(stack_t **stack, unsigned int line_number);
 void _pall(stack_t **stack, unsigned int line_number);
+
+/** Mandatory2.c */
 void _pint(stack_t **stack, unsigned int line_number);
 void _pop(stack_t **stack, unsigned int line_number);
+void _swap(stack_t **stack, unsigned int line_number);
+void _add(stack_t **stack, unsigned int line_number);
+void _nop(stack_t **stack, unsigned int line_number);
 
 #endif
