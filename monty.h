@@ -56,10 +56,12 @@ extern global_t global;
 
 char **string_to_arr(char *s, char *sep);
 void print_error(char *msg);
-void _push(stack_t **stack, unsigned int line_number);
-void _pall(stack_t **stack, unsigned int line_number);
 void (*instructions(char *s))(stack_t **stack, unsigned int line_number);
 void free_head(stack_t **head);
 int readmonty(char **codes, int cnt);
+
+void _push(stack_t **stack, unsigned int line_number);
+void _pall(stack_t **stack, unsigned int line_number);
+void _pint(stack_t **stack, unsigned int line_number);
 
 #endif
