@@ -8,8 +8,8 @@
 void (*instructions(char *s))(stack_t **stack, unsigned int line_number)
 {
 	instruction_t opcodes[] = {
-		{"push", insert},
-		{"pall", display},
+		{"push", _push},
+		{"pall", _pall},
 		{NULL, NULL}
 	};
 	int i = 0;
@@ -24,21 +24,19 @@ void (*instructions(char *s))(stack_t **stack, unsigned int line_number)
 }
 
 /**
- * insert - inserts into stack
+ * _push - inserts into stack
  * @stack: stack
  * @line_number: current line number in file
 */
-void insert(stack_t **stack, unsigned int line_number)
+void _push(stack_t **stack, unsigned int line_number)
 {
 	stack_t *newNode = malloc(sizeof(stack_t));
 	char *endptr;
 	long val;
 
-	(void)line_number;
 	(void)stack;
-
 	if (newNode == NULL)
-		print_error("Error: malloc failed\n");
+		print_error("Error: malloc failed");
 
 	errno = 0;
 	val = strtol(global.arg, &endptr, 10);
@@ -50,24 +48,18 @@ void insert(stack_t **stack, unsigned int line_number)
 
 	newNode->n = val;
 	newNode->prev = NULL;
-	if (global.head == NULL)
-	{
-		newNode->next = NULL;
-		global.head = newNode;
-		return;
-	}
-
+	if (global.head)
+		global.head->prev = newNode;
 	newNode->next = global.head;
-	global.head->prev = newNode;
 	global.head = newNode;
 }
 
 /**
- * display - displays all values in stack
+ * _pall - displays all values in stack
  * @stack: stack
  * @line_number: current line number in file
 */
-void display(stack_t **stack, unsigned int line_number)
+void _pall(stack_t **stack, unsigned int line_number)
 {
 	stack_t *headptr = (*stack);
 

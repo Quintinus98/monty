@@ -1,6 +1,6 @@
 #include "monty.h"
 
-global_t global;
+global_t global = {NULL, NULL, NULL};
 
 /**
  * main - Main program execution
@@ -11,14 +11,13 @@ global_t global;
 int main(int argc, char **argv)
 {
 	size_t len = 0;
-	int cnt = 0;
+	int cnt = 0, ret;
 	ssize_t nread;
 	FILE *stream;
 	char *dynline = NULL, **codes = NULL;
 
-	global.head = NULL;
 	if (argc != 2)
-		print_error("USAGE: monty file\n");
+		print_error("USAGE: monty file");
 
 	stream = fopen(argv[1], "r");
 	if (!stream)
@@ -34,13 +33,17 @@ int main(int argc, char **argv)
 		codes = string_to_arr(dynline, " \n");
 		if (!codes)
 			continue;
-		readmonty(codes, cnt);
+		ret = readmonty(codes, cnt);
 		free(codes);
+		if (ret == 1)
+			break;
 	}
 	free_head(&global.head);
 	free(dynline);
-
 	fclose(stream);
+	if (ret == 1)
+		exit(EXIT_FAILURE);
+
 	return (0);
 }
 
@@ -48,8 +51,9 @@ int main(int argc, char **argv)
  * readmonty - reads monty files
  * @codes: takes monty codes
  * @cnt: number of lines
+ * Return: 0 or 1
 */
-void readmonty(char **codes, int cnt)
+int readmonty(char **codes, int cnt)
 {
 	void (*instruction)(stack_t **stack, unsigned int line_number);
 
@@ -57,12 +61,13 @@ void readmonty(char **codes, int cnt)
 	if (!instruction)
 	{
 		fprintf(stderr, "L%d: unknown instruction %s\n", cnt, codes[0]);
-		exit(EXIT_FAILURE);
+		return (1);
 	}
 	global.opcode = codes[0];
 	global.arg = codes[1];
 
 	instruction(&global.head, cnt);
+	return (0);
 }
 
 /**

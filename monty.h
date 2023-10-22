@@ -56,10 +56,10 @@ extern global_t global;
 
 char **string_to_arr(char *s, char *sep);
 void print_error(char *msg);
-void insert(stack_t **stack, unsigned int line_number);
-void display(stack_t **stack, unsigned int line_number);
+void _push(stack_t **stack, unsigned int line_number);
+void _pall(stack_t **stack, unsigned int line_number);
 void (*instructions(char *s))(stack_t **stack, unsigned int line_number);
 void free_head(stack_t **head);
-void readmonty(char **codes, int cnt);
+int readmonty(char **codes, int cnt);
 
 #endif
