@@ -30,8 +30,6 @@ int main(int argc, char **argv)
 	for (; nread != -1; nread = getline(&dynline, &len, stream))
 	{
 		cnt++;
-		if (dynline[0] == '#')
-			continue;
 		comments(dynline);
 		codes = string_to_arr(dynline, " \n");
 		if (!codes)
