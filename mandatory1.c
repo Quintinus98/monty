@@ -19,6 +19,9 @@ void _push(stack_t **stack, unsigned int line_number)
 		exit(EXIT_FAILURE);
 	}
 
+	if (stack == NULL)
+		return;
+
 	if (global.is_stack == 1)
 		addnode(val);
 	else
