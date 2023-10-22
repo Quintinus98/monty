@@ -44,12 +44,14 @@ typedef struct instruction_s
  * @head: head linked list
  * @opcode: op code
  * @arg: character to be converted.
+ * @is_stack: If stack 1, if queue 0.
 */
 typedef struct global_s
 {
 	stack_t *head;
 	char *opcode;
 	char *arg;
+	int is_stack;
 } global_t;
 
 extern global_t global;
@@ -80,5 +82,19 @@ void _div(stack_t **stack, unsigned int line_number);
 void _mul(stack_t **stack, unsigned int line_number);
 void _mod(stack_t **stack, unsigned int line_number);
 void comments(char *buf);
+
+/** optional2.c*/
+void _pchar(stack_t **stack, unsigned int line_number);
+void _pstr(stack_t **stack, unsigned int line_number);
+void _rotl(stack_t **stack, unsigned int line_number);
+void _rotr(stack_t **stack, unsigned int line_number);
+void _queue(stack_t **stack, unsigned int line_number);
+
+/** optional3.c*/
+void _stack(stack_t **stack, unsigned int line_number);
+
+/** helper_funcs.c */
+void addnode(int val);
+void addnode_end(int val);
 
 #endif
