@@ -37,16 +37,14 @@ void _div(stack_t **stack, unsigned int line_number)
 		exit(EXIT_FAILURE);
 	}
 
-	temp = headptr->next;
 	if (headptr->n == 0)
 	{
-		fprintf(stderr, "L%d: division by zero", line_number);
+		fprintf(stderr, "L%d: division by zero\n", line_number);
 		exit(EXIT_FAILURE);
 	}
+	temp = headptr->next;
 	temp->n /= (headptr->n);
 	_pop(stack, line_number);
-
-	*stack = temp;
 }
 
 /**
@@ -56,7 +54,7 @@ void _div(stack_t **stack, unsigned int line_number)
 */
 void _mul(stack_t **stack, unsigned int line_number)
 {
-	stack_t *headptr = *stack;
+	stack_t *headptr = *stack, *temp;
 
 	if (headptr == NULL || headptr->next == NULL)
 	{
@@ -64,9 +62,9 @@ void _mul(stack_t **stack, unsigned int line_number)
 		exit(EXIT_FAILURE);
 	}
 
-	headptr->next->n *= headptr->n;
-	*stack = headptr->next;
-	free(headptr);
+	temp = headptr->next;
+	temp->n *= (headptr->n);
+	_pop(stack, line_number);
 }
 
 /**
@@ -84,11 +82,14 @@ void _mod(stack_t **stack, unsigned int line_number)
 		exit(EXIT_FAILURE);
 	}
 
+	if (headptr->n == 0)
+	{
+		fprintf(stderr, "L%d: division by zero\n", line_number);
+		exit(EXIT_FAILURE);
+	}
 	temp = headptr->next;
 	temp->n %= (headptr->n);
 	_pop(stack, line_number);
-
-	*stack = temp;
 }
 
 /**
